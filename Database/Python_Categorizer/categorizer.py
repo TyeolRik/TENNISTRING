@@ -20,7 +20,6 @@ def is_diameter(input_string: str) -> bool:
 def is_gauge(input_string: str) -> bool:
     if 'L' in input_string:
         input_string = input_string[:len(input_string) - 1]
-        print("is_gauge method:", input_string)
     try:
         temp = int(input_string)
         if 15 <= temp <= 19:
@@ -97,11 +96,11 @@ def parsing_brand_stringname_diameter(information: str) -> list:
         print("Write fit structure")
         diameter = input()
         if is_diameter(diameter):
-            outputlist[2] = diameter
+            outputlist[2] = '%.2f' % diameter
             information = information[:len(information) - len(diameter)].rstrip().lstrip()
             outputlist[1] = information
         elif is_gauge(diameter):
-            outputlist[2] = US_gauge_to_Diameter(diameter)
+            outputlist[2] = '%.2f' % US_gauge_to_Diameter(diameter)
             information = information[:len(information) - len(diameter)].rstrip().lstrip()
             outputlist[1] = information
         else:
@@ -142,6 +141,6 @@ for line in csv_reader:
     for i in range(10):
         each_row[i + 3] = line[i + 1]
     csv_writer.writerow(each_row)
-    print(each_row)
+    print(each_row[0].ljust(20), each_row[1])
     
 string_csvfile.close()
