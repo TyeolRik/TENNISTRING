@@ -19,6 +19,7 @@ import java.util.List;
 
 import io.tyeolrik.tennistring.MainActivity;
 import io.tyeolrik.tennistring.R;
+import io.tyeolrik.tennistring.ui.initialize.InitializeUser;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -49,6 +50,9 @@ public class LoginActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 // Successfully signed in
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                Intent goToMainActivity = new Intent(this, InitializeUser.class);
+                startActivity(goToMainActivity);
                 // ...
             } else {
                 // Sign in failed. If response is null the user canceled the

@@ -22,4 +22,9 @@
         android:name="io.tyeolrik.tennistring.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
+    <fragment
+        android:id="@+id/nav_userInfo"
+        android:name="io.tyeolrik.tennistring.ui.userInfo.UserInfoFragment"
+        android:label="@string/menu_userInfo"
+        tools:layout="@layout/fragment_userinfo" />
 </navigation>

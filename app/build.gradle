@@ -42,6 +42,9 @@ dependencies {
     // Firebase LOGIN UI
     implementation 'com.firebaseui:firebase-ui-auth:4.3.1'
     implementation 'com.google.firebase:firebase-auth:19.3.1'
+
+    // Picasso (Image import)
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }
 
 apply plugin: 'com.google.gms.google-services'  // Firebase

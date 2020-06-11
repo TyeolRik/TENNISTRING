@@ -1,13 +1,25 @@
 package io.tyeolrik.tennistring;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 
+import androidx.core.graphics.drawable.RoundedBitmapDrawable;
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -18,12 +30,18 @@ import androidx.appcompat.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity {
 
+    private FirebaseUser user;
+
     private AppBarConfiguration mAppBarConfiguration;
+    private NavController navController;
+    DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        user = FirebaseAuth.getInstance().getCurrentUser();
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -34,17 +52,47 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.bringToFront();
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
+                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow, R.id.nav_userInfo)
                 .setDrawerLayout(drawer)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        // User setting
+        try {
+            Log.d("FirebaseUser", user.toString());
+            View header = navigationView.getHeaderView(0);
+            final ImageView userImage = (ImageView) header.findViewById(R.id.userImage);
+            TextView userName = (TextView) header.findViewById(R.id.userName);
+            TextView userEmail = (TextView) header.findViewById(R.id.userEmail);
+            userName.setText(user.getDisplayName());
+            userEmail.setText(user.getEmail());
+            Picasso.get().load(user.getPhotoUrl()).resize(200, 200).into(userImage, new Callback() {
+                @Override
+                public void onSuccess() {
+                    Bitmap imageBitmap = ((BitmapDrawable) userImage.getDrawable()).getBitmap();
+                    RoundedBitmapDrawable imageDrawable = RoundedBitmapDrawableFactory.create(getResources(), imageBitmap);
+                    imageDrawable.setCircular(true);
+                    imageDrawable.setCornerRadius(Math.max(imageBitmap.getWidth(), imageBitmap.getHeight()) / 2.0f);
+                    userImage.setImageDrawable(imageDrawable);
+                }
+
+                @Override
+                public void onError(Exception e) {
+
+                }
+            });     // Make Image Circle.
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
