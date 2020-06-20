@@ -1,4 +1,4 @@
-package io.tyeolrik.tennistring.ui.slideshow;
+package io.tyeolrik.tennistring.ui.stringzone;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import io.tyeolrik.tennistring.R;
 
-public class SlideshowFragment extends Fragment {
+public class StringZoneFragment extends Fragment {
 
-    private SlideshowViewModel slideshowViewModel;
+    private StringZoneViewModel stringZoneViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        slideshowViewModel =
-                ViewModelProviders.of(this).get(SlideshowViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_slideshow, container, false);
-        final TextView textView = root.findViewById(R.id.text_slideshow);
-        slideshowViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        stringZoneViewModel =
+                ViewModelProviders.of(this).get(StringZoneViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_stringzone, container, false);
+        final TextView textView = root.findViewById(R.id.text_gallery);
+        stringZoneViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

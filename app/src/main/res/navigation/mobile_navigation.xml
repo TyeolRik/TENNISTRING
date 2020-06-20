@@ -7,21 +7,21 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="io.tyeolrik.tennistring.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        android:name="io.tyeolrik.tennistring.ui.mypage.MyPageFragment"
+        android:label="@string/menu_mypage"
+        tools:layout="@layout/fragment_mypage" />
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="io.tyeolrik.tennistring.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:name="io.tyeolrik.tennistring.ui.stringzone.StringZoneFragment"
+        android:label="@string/menu_string_zone"
+        tools:layout="@layout/fragment_stringzone" />
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="io.tyeolrik.tennistring.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:name="io.tyeolrik.tennistring.ui.equipmentzone.EquipmentZoneFragment"
+        android:label="@string/menu_equipment_zone"
+        tools:layout="@layout/fragment_equipmentzone" />
     <fragment
         android:id="@+id/nav_userInfo"
         android:name="io.tyeolrik.tennistring.ui.userInfo.UserInfoFragment"

@@ -1,4 +1,4 @@
-package io.tyeolrik.tennistring.ui.home;
+package io.tyeolrik.tennistring.ui.equipmentzone;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import io.tyeolrik.tennistring.R;
 
-public class HomeFragment extends Fragment {
+public class EquipmentZoneFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
+    private EquipmentZoneViewModel equipmentZoneViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                ViewModelProviders.of(this).get(HomeViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        equipmentZoneViewModel =
+                ViewModelProviders.of(this).get(EquipmentZoneViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_equipmentzone, container, false);
+        final TextView textView = root.findViewById(R.id.text_slideshow);
+        equipmentZoneViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

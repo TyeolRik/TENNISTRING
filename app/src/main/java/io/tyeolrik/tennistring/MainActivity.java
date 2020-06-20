@@ -2,7 +2,6 @@ package io.tyeolrik.tennistring;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,14 +9,21 @@ import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import androidx.annotation.NonNull;
 import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 import androidx.navigation.NavController;
@@ -28,9 +34,18 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import java.util.Map;
+
+import io.tyeolrik.tennistring.Database.StringDataBase;
+
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseUser user;
+    FirebaseFirestore database = FirebaseFirestore.getInstance();
+
+    StringDataBase stringDataBase = StringDataBase.getInstance();
+
+    Map<String, Map<String, Map<String, String>>> stringData;
 
     private AppBarConfiguration mAppBarConfiguration;
     private NavController navController;
@@ -93,6 +108,19 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        CollectionReference stringRef = database.collection("string");
+        stringRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        stringDataBase.putBrandAndName(document.getData().get("Brand").toString(), document.getData().get("Name").toString());
+                    }
+                } else {
+                    Log.d("FirebaseString", "FAILED! " + task.getException());
+                }
+            }
+        });
     }
 
     @Override

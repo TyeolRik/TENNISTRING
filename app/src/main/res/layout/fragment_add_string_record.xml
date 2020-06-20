@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.mypage.AddStringRecordFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary_Background">
+
+        <ImageButton
+            android:id="@+id/confirmStringRecord"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="22dp"
+            android:layout_marginEnd="48dp"
+            android:background="#00000000"
+            android:scaleX="2"
+            android:scaleY="2"
+            android:src="@drawable/ic_baseline_check_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/addStringYear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="16dp"
+            android:text="0000년"
+            android:textColor="#000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/confirmStringRecord" />
+
+        <TextView
+            android:id="@+id/addStringMonth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="00월"
+            android:textColor="#000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/addStringYear"
+            app:layout_constraintTop_toBottomOf="@+id/confirmStringRecord" />
+
+        <TextView
+            android:id="@+id/addStringDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="00일"
+            android:textColor="#000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/addStringMonth"
+            app:layout_constraintTop_toBottomOf="@+id/confirmStringRecord" />
+
+        <TextView
+            android:id="@+id/addStringDataBrand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="32dp"
+            android:text="브랜드를 입력해주세요"
+            android:textColor="#000"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addStringYear" />
+
+        <TextView
+            android:id="@+id/addStringDataStringName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="32dp"
+            android:text="스트링 이름을 입력해주세요"
+            android:textColor="#000"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addStringDataBrand" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="Main"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toTopOf="@+id/addStringDataTensionMain"
+            app:layout_constraintEnd_toEndOf="@+id/addStringDataTensionMain"
+            app:layout_constraintStart_toStartOf="@+id/addStringDataTensionMain" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="파운드"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="@+id/addStringDataTensionMain"
+            app:layout_constraintStart_toStartOf="@+id/addStringDataTensionMain"
+            app:layout_constraintTop_toBottomOf="@+id/addStringDataTensionMain" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="파운드"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="@+id/addStringDataTensionCross"
+            app:layout_constraintStart_toStartOf="@+id/addStringDataTensionCross"
+            app:layout_constraintTop_toBottomOf="@+id/addStringDataTensionCross" />
+
+        <TextView
+            android:id="@+id/addStringDataTensionMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="124dp"
+            android:text="00"
+            android:textAlignment="center"
+            android:textColor="#000"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/addStringDataTensionCross"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addStringDataStringName" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="Cross"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toTopOf="@+id/addStringDataTensionCross"
+            app:layout_constraintEnd_toEndOf="@+id/addStringDataTensionCross"
+            app:layout_constraintStart_toStartOf="@+id/addStringDataTensionCross" />
+
+        <TextView
+            android:id="@+id/addStringDataTensionCross"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="124dp"
+            android:text="00"
+            android:textAlignment="center"
+            android:textColor="#000"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/addStringDataTensionMain"
+            app:layout_constraintTop_toBottomOf="@+id/addStringDataStringName" />
+
+        <NumberPicker
+            android:id="@+id/itemPicker"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginEnd="48dp"
+            android:layout_marginBottom="48dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

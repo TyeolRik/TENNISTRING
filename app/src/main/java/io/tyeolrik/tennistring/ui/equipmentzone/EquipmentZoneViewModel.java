@@ -1,16 +1,16 @@
-package io.tyeolrik.tennistring.ui.slideshow;
+package io.tyeolrik.tennistring.ui.equipmentzone;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class SlideshowViewModel extends ViewModel {
+public class EquipmentZoneViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public SlideshowViewModel() {
+    public EquipmentZoneViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is slideshow fragment");
+        mText.setValue("This is equipmentzone fragment");
     }
 
     public LiveData<String> getText() {

@@ -7,12 +7,18 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Log;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -50,9 +56,20 @@ public class LoginActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 // Successfully signed in
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                DocumentReference docRef = FirebaseFirestore.getInstance().collection("user").document(user.getUid());
+                docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                        if (documentSnapshot.exists()) {
+                            Intent goToMainActivity = new Intent(getBaseContext(), MainActivity.class);
+                            startActivity(goToMainActivity);
+                        } else {
+                            Intent goToInitializeUserActivity = new Intent(getBaseContext(), InitializeUser.class);
+                            startActivity(goToInitializeUserActivity);
+                        }
+                    }
+                });
 
-                Intent goToMainActivity = new Intent(this, InitializeUser.class);
-                startActivity(goToMainActivity);
                 // ...
             } else {
                 // Sign in failed. If response is null the user canceled the
