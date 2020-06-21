@@ -6,6 +6,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,6 +48,10 @@ public class StringZoneFragment extends Fragment {
     ListView statisticsListView;
     StringListViewAdapter stringListViewAdapter;
 
+    FrameLayout stringFragmentFrameLayout;
+    ImageButton stringInformationBackButton;
+    TextView stringInformation_Brand, stringInformation_Gauge, stringInformation_Name, stringInformation_Durability, stringInformation_Power, stringInformation_Control, stringInformation_Feel, stringInformation_Spin, stringInformation_Tension;
+
     ArrayList<String> whatIsClickedNow;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -72,6 +79,19 @@ public class StringZoneFragment extends Fragment {
         stringListViewAdapter               = new StringListViewAdapter();
         statisticsListView.setAdapter(stringListViewAdapter);
         stringListViewAdapter.addTitle();
+
+        stringFragmentFrameLayout           = root.findViewById(R.id.stringFragmentFrameLayout);
+        stringInformationBackButton         = root.findViewById(R.id.stringInformationBackButton);
+
+        stringInformation_Brand             = root.findViewById(R.id.stringInformation_Brand);
+        stringInformation_Gauge             = root.findViewById(R.id.stringInformation_Gauge);
+        stringInformation_Name             = root.findViewById(R.id.stringInformation_Name);
+        stringInformation_Durability             = root.findViewById(R.id.stringInformation_Durability);
+        stringInformation_Power             = root.findViewById(R.id.stringInformation_Power);
+        stringInformation_Control             = root.findViewById(R.id.stringInformation_Control);
+        stringInformation_Feel             = root.findViewById(R.id.stringInformation_Feel);
+        stringInformation_Spin             = root.findViewById(R.id.stringInformation_Spin);
+        stringInformation_Tension             = root.findViewById(R.id.stringInformation_Tension);
 
         whatIsClickedNow = new ArrayList<>();
 
@@ -137,6 +157,66 @@ public class StringZoneFragment extends Fragment {
             }
         });
 
+        statisticsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Log.d("onItemClick", "Position: " + i);
+                HashMap<String, Object> item = (HashMap<String, Object>) stringListViewAdapter.getItem(i);
+                String brand = item.get("Brand").toString();
+                String name = item.get("Name").toString();
+                String brand_name = brand + "-" + name;
+
+                database.collection("string")
+                        .document(brand_name)
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()) {
+                                    if(task.getResult() != null) {
+
+                                        double durability      = (double) task.getResult().getData().get("Durability");
+                                        double power           = (double) task.getResult().getData().get("Power");
+                                        double control         = (double) task.getResult().getData().get("Control");
+                                        double feel            = (double) task.getResult().getData().get("Feel");
+                                        double spin            = (double) task.getResult().getData().get("Spin");
+                                        double stability       = (double) task.getResult().getData().get("Tension Stability");
+
+                                        stringInformation_Brand.setText(task.getResult().getData().get("Brand").toString());
+                                        stringInformation_Gauge.setText(String.format(Locale.KOREA, "%.2fmm", (Double) task.getResult().getData().get("Diameter")));
+                                        stringInformation_Name.setText(task.getResult().getData().get("Name").toString());
+                                        stringInformation_Durability.setText(String.format(Locale.KOREA, "%.0f", (durability * 100)));
+                                        stringInformation_Power.setText(String.format(Locale.KOREA, "%.0f", (power * 100)));
+                                        stringInformation_Control.setText(String.format(Locale.KOREA, "%.0f", (control * 100)));
+                                        stringInformation_Feel.setText(String.format(Locale.KOREA, "%.0f", (feel * 100)));
+                                        stringInformation_Spin.setText(String.format(Locale.KOREA, "%.0f", (spin * 100)));
+                                        stringInformation_Tension.setText(String.format(Locale.KOREA, "%.0f", (stability * 100)));
+
+                                        statisticsListView.setVisibility(View.INVISIBLE);
+                                        statisticsListView.setClickable(false);
+                                        stringFragmentFrameLayout.setVisibility(View.VISIBLE);
+                                        stringFragmentFrameLayout.setClickable(true);
+                                    } else {
+                                        Log.d("Firebase", "THERE IS No Data FATAL ERROR!!!!");
+                                    }
+                                } else {
+                                    Log.d("Firebase", "FATAL ERROR with", task.getException());
+                                }
+                            }
+                        });
+            }
+        });
+
+        stringInformationBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                statisticsListView.setVisibility(View.VISIBLE);
+                statisticsListView.setClickable(true);
+                stringFragmentFrameLayout.setVisibility(View.INVISIBLE);
+                stringFragmentFrameLayout.setClickable(false);
+            }
+        });
+
         stringZoneViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
@@ -161,13 +241,13 @@ public class StringZoneFragment extends Fragment {
                     point = "Control";
                     break;
                 case R.id.needSoftness:
-                    point = "Softness";
+                    point = "Feel";
                     break;
                 case R.id.needSpin:
                     point = "Spin";
                     break;
                 case R.id.needTension:
-                    point = "Tension";
+                    point = "Tension Stability";
                     break;
             }
             if (whatIsClickedNow.contains(point)) {
@@ -175,7 +255,18 @@ public class StringZoneFragment extends Fragment {
                 whatIsClickedNow.remove(point);
             } else {
                 if (whatIsClickedNow.size() >= 1) {
-                    Toast.makeText(getContext(), "최대 1개까지 선택 가능합니다!\n하나를 선택해제해주세요!", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(getContext(), "최대 1개까지 선택 가능합니다!\n하나를 선택해제해주세요!", Toast.LENGTH_SHORT).show();
+                    whatIsClickedNow.remove(0);
+                    whatIsClickedNow.add(point);
+
+                    needDurability.setBackgroundColor(Color.TRANSPARENT);
+                    needPower.setBackgroundColor(Color.TRANSPARENT);
+                    needControl.setBackgroundColor(Color.TRANSPARENT);
+                    needSoftness.setBackgroundColor(Color.TRANSPARENT);
+                    needSpin.setBackgroundColor(Color.TRANSPARENT);
+                    needTension.setBackgroundColor(Color.TRANSPARENT);
+
+                    view.setBackgroundColor(Color.GRAY);
                 } else {
                     view.setBackgroundColor(Color.GRAY);
                     whatIsClickedNow.add(point);

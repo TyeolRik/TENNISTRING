@@ -10,7 +10,7 @@ public class EquipmentZoneViewModel extends ViewModel {
 
     public EquipmentZoneViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is equipmentzone fragment");
+        mText.setValue("장비 추천 관련 Page가 올라올 예정\n개발중 @_@");
     }
 
     public LiveData<String> getText() {

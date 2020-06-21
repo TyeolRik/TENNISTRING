@@ -88,6 +88,245 @@
         app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
         app:layout_constraintTop_toTopOf="@+id/textView14" />
 
+    <FrameLayout
+        android:id="@+id/recommendFrameLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+        <ListView
+            android:id="@+id/statisticsListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="0dp"
+            android:clickable="true"
+            android:scrollbars="vertical"
+            android:scrollingCache="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <FrameLayout
+            android:id="@+id/stringFragmentFrameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="false"
+            android:visibility="invisible"
+            tools:context=".ui.stringzone.StringInformation">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageButton
+                    android:id="@+id/stringInformationBackButton"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#00000000"
+                    android:src="@drawable/ic_baseline_arrow_back_24_black"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/stringInformation_Brand"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Brand"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/stringInformationBackButton" />
+
+                <TextView
+                    android:id="@+id/stringInformation_Gauge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="1.18mm"
+                    app:layout_constraintBottom_toBottomOf="@+id/stringInformation_Brand"
+                    app:layout_constraintStart_toEndOf="@+id/stringInformation_Brand"
+                    app:layout_constraintTop_toTopOf="@+id/stringInformation_Brand" />
+
+                <TextView
+                    android:id="@+id/stringInformation_Name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="StringName"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/stringInformation_Brand"
+                    app:layout_constraintTop_toBottomOf="@+id/stringInformation_Brand" />
+
+                <TextView
+                    android:id="@+id/stringInformation_TitleDurability"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:text="내구성"
+                    android:textAlignment="center"
+                    app:layout_constraintEnd_toStartOf="@+id/stringInformation_TitlePower"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/stringInformation_Name" />
+
+                <TextView
+                    android:id="@+id/stringInformation_TitlePower"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="파워"
+                    android:textAlignment="center"
+                    app:layout_constraintBottom_toBottomOf="@+id/stringInformation_TitleDurability"
+                    app:layout_constraintEnd_toStartOf="@+id/stringInformation_TitleControl"
+                    app:layout_constraintStart_toEndOf="@+id/stringInformation_TitleDurability"
+                    app:layout_constraintTop_toTopOf="@+id/stringInformation_TitleDurability" />
+
+                <TextView
+                    android:id="@+id/stringInformation_TitleControl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="컨트롤"
+                    android:textAlignment="center"
+                    app:layout_constraintBottom_toBottomOf="@+id/stringInformation_TitlePower"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/stringInformation_TitlePower"
+                    app:layout_constraintTop_toTopOf="@+id/stringInformation_TitlePower" />
+
+                <TextView
+                    android:id="@+id/stringInformation_Durability"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="00"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/stringInformation_TitleDurability"
+                    app:layout_constraintStart_toStartOf="@+id/stringInformation_TitleDurability"
+                    app:layout_constraintTop_toBottomOf="@+id/stringInformation_TitleDurability" />
+
+                <TextView
+                    android:id="@+id/stringInformation_Power"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="00"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/stringInformation_TitlePower"
+                    app:layout_constraintStart_toStartOf="@+id/stringInformation_TitlePower"
+                    app:layout_constraintTop_toBottomOf="@+id/stringInformation_TitlePower" />
+
+                <TextView
+                    android:id="@+id/stringInformation_Control"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="00"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/stringInformation_TitleControl"
+                    app:layout_constraintStart_toStartOf="@+id/stringInformation_TitleControl"
+                    app:layout_constraintTop_toBottomOf="@+id/stringInformation_TitleControl" />
+
+                <TextView
+                    android:id="@+id/stringInformation_TitleFeel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="부드러움"
+                    android:textAlignment="center"
+                    app:layout_constraintEnd_toEndOf="@+id/stringInformation_Durability"
+                    app:layout_constraintStart_toStartOf="@+id/stringInformation_Durability"
+                    app:layout_constraintTop_toBottomOf="@+id/stringInformation_Durability" />
+
+                <TextView
+                    android:id="@+id/stringInformation_TitleSpin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="스핀"
+                    android:textAlignment="center"
+                    app:layout_constraintEnd_toEndOf="@+id/stringInformation_Power"
+                    app:layout_constraintStart_toStartOf="@+id/stringInformation_Power"
+                    app:layout_constraintTop_toBottomOf="@+id/stringInformation_Power" />
+
+                <TextView
+                    android:id="@+id/stringInformation_TitleTension"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="텐션유지"
+                    android:textAlignment="center"
+                    app:layout_constraintEnd_toEndOf="@+id/stringInformation_Control"
+                    app:layout_constraintStart_toStartOf="@+id/stringInformation_Control"
+                    app:layout_constraintTop_toBottomOf="@+id/stringInformation_Control" />
+
+                <TextView
+                    android:id="@+id/stringInformation_Feel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="00"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/stringInformation_TitleFeel"
+                    app:layout_constraintStart_toStartOf="@+id/stringInformation_TitleFeel"
+                    app:layout_constraintTop_toBottomOf="@+id/stringInformation_TitleFeel" />
+
+                <TextView
+                    android:id="@+id/stringInformation_Spin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="00"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/stringInformation_TitleSpin"
+                    app:layout_constraintStart_toStartOf="@+id/stringInformation_TitleSpin"
+                    app:layout_constraintTop_toBottomOf="@+id/stringInformation_TitleSpin" />
+
+                <TextView
+                    android:id="@+id/stringInformation_Tension"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="00"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/stringInformation_TitleTension"
+                    app:layout_constraintStart_toStartOf="@+id/stringInformation_TitleTension"
+                    app:layout_constraintTop_toBottomOf="@+id/stringInformation_TitleTension" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </FrameLayout>
+    </FrameLayout>
+
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="0dp"
@@ -188,21 +427,5 @@
         </LinearLayout>
 
     </LinearLayout>
-
-    <ListView
-        android:id="@+id/statisticsListView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginBottom="16dp"
-        android:scrollbars="vertical"
-        android:scrollingCache="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

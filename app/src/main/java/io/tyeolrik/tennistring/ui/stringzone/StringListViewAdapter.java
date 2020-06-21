@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -18,7 +19,11 @@ public class StringListViewAdapter extends BaseAdapter {
     // Adapter에 추가된 데이터를 저장하기 위한 ArrayList
     private ArrayList<HashMap<String, Object>> listViewItemList = new ArrayList<HashMap<String, Object>>() ;
 
-    private TextView need_recommend_string_brand, need_recommend_string_name;
+    static class ViewHolder
+    {
+        TextView need_recommend_string_brand, need_recommend_string_name;
+    }
+
 
     @Override
     public int getCount() {
@@ -40,18 +45,30 @@ public class StringListViewAdapter extends BaseAdapter {
         final int pos = position;
         final Context context = parent.getContext();
 
+        ViewHolder holder;
+
         // "listview_item" Layout을 inflate하여 convertView 참조 획득.
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.recommend_string_layout, parent, false);
+            holder = new ViewHolder();
+
+            holder.need_recommend_string_brand = view.findViewById(R.id.need_recommend_string_brand);
+            holder.need_recommend_string_name  = view.findViewById(R.id.need_recommend_string_name);
+
+            view.setTag(holder);
+        } else {
+            holder = (ViewHolder) view.getTag();
         }
 
-        need_recommend_string_brand = view.findViewById(R.id.need_recommend_string_brand);
-        need_recommend_string_name  = view.findViewById(R.id.need_recommend_string_name);
+        if (position == 0) {
+            holder.need_recommend_string_brand.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            holder.need_recommend_string_name.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        }
 
         HashMap<String, Object> item = listViewItemList.get(position);
-        need_recommend_string_brand.setText(item.get("Brand").toString());
-        need_recommend_string_name.setText(item.get("Name").toString());
+        holder.need_recommend_string_brand.setText(item.get("Brand").toString());
+        holder.need_recommend_string_name.setText(item.get("Name").toString());
 
         return view;
     }
