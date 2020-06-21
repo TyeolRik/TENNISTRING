@@ -6,6 +6,165 @@
     android:layout_height="match_parent"
     tools:context=".ui.mypage.MyPageFragment">
 
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="당신의 스트링 스타일은?"
+        app:layout_constraintBottom_toTopOf="@+id/durabilityTitle"
+        app:layout_constraintStart_toStartOf="@+id/Durability" />
+
+    <TextView
+        android:id="@+id/durabilityTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="내구성"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/Durability"
+        app:layout_constraintEnd_toEndOf="@+id/Durability"
+        app:layout_constraintStart_toStartOf="@+id/Durability" />
+
+    <TextView
+        android:id="@+id/powerTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:text="스핀"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/Power"
+        app:layout_constraintEnd_toEndOf="@+id/Power"
+        app:layout_constraintStart_toStartOf="@+id/Power" />
+
+    <TextView
+        android:id="@+id/controlTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="컨트롤"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/Control"
+        app:layout_constraintEnd_toEndOf="@+id/Control"
+        app:layout_constraintStart_toStartOf="@+id/Control" />
+
+    <TextView
+        android:id="@+id/Durability"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:text="00"
+        android:textAlignment="center"
+        android:textColor="#000"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/feelTitle"
+        app:layout_constraintEnd_toEndOf="@+id/Feel"
+        app:layout_constraintStart_toStartOf="@+id/Feel" />
+
+    <TextView
+        android:id="@+id/Power"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:text="00"
+        android:textAlignment="center"
+        android:textColor="#000"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/spinTitle"
+        app:layout_constraintEnd_toEndOf="@+id/spinTitle"
+        app:layout_constraintStart_toStartOf="@+id/spinTitle" />
+
+    <TextView
+        android:id="@+id/Control"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:text="00"
+        android:textAlignment="center"
+        android:textColor="#000"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/stabilityTitle"
+        app:layout_constraintEnd_toEndOf="@+id/stabilityTitle"
+        app:layout_constraintStart_toStartOf="@+id/stabilityTitle" />
+
+    <TextView
+        android:id="@+id/feelTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="부드러움"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/Feel"
+        app:layout_constraintEnd_toEndOf="@+id/Feel"
+        app:layout_constraintStart_toStartOf="@+id/Feel" />
+
+    <TextView
+        android:id="@+id/spinTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:text="스핀"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/Spin"
+        app:layout_constraintEnd_toEndOf="@+id/Spin"
+        app:layout_constraintStart_toStartOf="@+id/Spin" />
+
+    <TextView
+        android:id="@+id/stabilityTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="장력안정성"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/Stability"
+        app:layout_constraintEnd_toEndOf="@+id/Stability"
+        app:layout_constraintStart_toStartOf="@+id/Stability" />
+
+    <TextView
+        android:id="@+id/Feel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
+        android:text="00"
+        android:textAlignment="center"
+        android:textColor="#000"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/Spin"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/Stability"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
+        android:text="00"
+        android:textAlignment="center"
+        android:textColor="#000"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/Spin" />
+
+    <TextView
+        android:id="@+id/Spin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
+        android:text="00"
+        android:textAlignment="center"
+        android:textColor="#000"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/Stability"
+        app:layout_constraintStart_toEndOf="@+id/Feel" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
@@ -44,20 +203,23 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ListView
         android:id="@+id/ListViewMyStringRecord"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="48dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
         android:dividerHeight="2px"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textView4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0">
+
+    </ListView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

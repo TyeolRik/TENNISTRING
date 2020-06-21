@@ -21,7 +21,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -36,6 +39,8 @@ import java.util.Objects;
 
 import io.tyeolrik.tennistring.Database.StringDataBase;
 import io.tyeolrik.tennistring.R;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -54,7 +59,11 @@ public class AddStringRecordFragment extends Fragment {
 
     FirebaseFirestore database;
 
+    Task<QuerySnapshot> allStringData;
+    HashMap<String, String> stringDatas;
+
     private String selectedBrand = "";
+    private String selectedString = "";
 
     private int thisYear;
     private int thisMonth;
@@ -106,6 +115,7 @@ public class AddStringRecordFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Log.d("LifeCycle", "AddStringRecordFragment onCreateView");
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_add_string_record, container, false);
         database = FirebaseFirestore.getInstance();
@@ -132,36 +142,155 @@ public class AddStringRecordFragment extends Fragment {
         addStringDataTensionMain.setOnClickListener(wakeupNumberPicker);
         addStringDataTensionCross.setOnClickListener(wakeupNumberPicker);
 
+        stringDatas = new HashMap<>();
+        allStringData = database.collection("user")
+                .document(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
+                .collection("StringWorks")
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()) {
+                            for(QueryDocumentSnapshot document : task.getResult()) {
+                                String documentID = document.getId();
+                                String date = documentID.substring(0, 10);
+                                String count = documentID.substring(11);
+                                Log.d("Firebase", "Date: " + date);
+                                Log.d("Firebase", "Count: " + count);
+                                stringDatas.put(date, count);
+                            }
+                        } else {
+                            task.getException().printStackTrace();
+                        }
+                    }
+                });
+
         confirmStringRecord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Map<String, Object> stringRecord = new HashMap<>();
-                String date = addStringYear.getText().toString().substring(0, 4) + "-"
-                        + addStringMonth.getText().toString().substring(0, 2) + "-"
-                        + addStringDate.getText().toString().substring(0, 2);
-                stringRecord.put("Date", date);
-                stringRecord.put("Brand", addStringDataBrand.getText().toString());
-                stringRecord.put("Name", addStringDataStringName.getText().toString());
-                stringRecord.put("Main", Integer.parseInt(addStringDataTensionMain.getText().toString()));
-                stringRecord.put("Cross", Integer.parseInt(addStringDataTensionCross.getText().toString()));
+                if(selectedBrand.equals("")) {
+                    Log.d("UnSelected", "selectedBrand");
+                    Animation _shaking = AnimationUtils.loadAnimation(view.getContext(), R.anim.shaking);
+                    _shaking.setAnimationListener(new Animation.AnimationListener() {
+                        @Override
+                        public void onAnimationStart(Animation animation) {
+                            addStringDataBrand.setTextColor(Color.RED);
+                        }
 
-                database.collection("user")
-                        .document(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
-                        .collection(date)
-                        .document()
-                        .set(stringRecord)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if(task.isSuccessful()) {
-                                    Log.d("Firebase", "SUCCESS! Return to MyPage!");
-                                    getActivity().getSupportFragmentManager().popBackStackImmediate();
-                                } else {
-                                    task.getException().printStackTrace();
+                        @Override
+                        public void onAnimationEnd(Animation animation) {
+                            addStringDataBrand.setTextColor(Color.BLACK);
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animation animation) {
+
+                        }
+                    });
+                    addStringDataBrand.startAnimation(_shaking);
+                }
+                if(selectedString.equals("")) {
+                    Log.d("UnSelected", "selectedString");
+                    Animation _shaking = AnimationUtils.loadAnimation(view.getContext(), R.anim.shaking);
+                    _shaking.setAnimationListener(new Animation.AnimationListener() {
+                        @Override
+                        public void onAnimationStart(Animation animation) {
+                            addStringDataStringName.setTextColor(Color.RED);
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animation animation) {
+                            addStringDataStringName.setTextColor(Color.BLACK);
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animation animation) {
+
+                        }
+                    });
+                    addStringDataStringName.startAnimation(_shaking);
+                }
+                if(Integer.parseInt(addStringDataTensionMain.getText().toString()) == 0)  {
+                    Log.d("UnSelected", "addStringDataTensionMain");
+                    Animation _shaking = AnimationUtils.loadAnimation(view.getContext(), R.anim.shaking);
+                    _shaking.setAnimationListener(new Animation.AnimationListener() {
+                        @Override
+                        public void onAnimationStart(Animation animation) {
+                            addStringDataTensionMain.setTextColor(Color.RED);
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animation animation) {
+                            addStringDataTensionMain.setTextColor(Color.BLACK);
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animation animation) {
+
+                        }
+                    });
+                    addStringDataTensionMain.startAnimation(_shaking);
+                }
+                if(Integer.parseInt(addStringDataTensionCross.getText().toString()) == 0) {
+                    Log.d("UnSelected", "addStringDataTensionCross");
+                    Animation _shaking = AnimationUtils.loadAnimation(view.getContext(), R.anim.shaking);
+                    _shaking.setAnimationListener(new Animation.AnimationListener() {
+                        @Override
+                        public void onAnimationStart(Animation animation) {
+                            addStringDataTensionCross.setTextColor(Color.RED);
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animation animation) {
+                            addStringDataTensionCross.setTextColor(Color.BLACK);
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animation animation) {
+
+                        }
+                    });
+                    addStringDataTensionCross.startAnimation(_shaking);
+                }
+
+                if(selectedBrand != "" && selectedString != "" && Integer.parseInt(addStringDataTensionMain.getText().toString()) != 0  && Integer.parseInt(addStringDataTensionCross.getText().toString()) != 0) {
+                    Map<String, Object> stringRecord = new HashMap<>();
+                    String date = addStringYear.getText().toString().substring(0, 4) + "-"
+                            + addStringMonth.getText().toString().substring(0, 2) + "-"
+                            + addStringDate.getText().toString().substring(0, 2);
+                    stringRecord.put("Date", date);
+                    stringRecord.put("Brand", addStringDataBrand.getText().toString());
+                    stringRecord.put("Name", addStringDataStringName.getText().toString());
+                    stringRecord.put("Main", Integer.parseInt(addStringDataTensionMain.getText().toString()));
+                    stringRecord.put("Cross", Integer.parseInt(addStringDataTensionCross.getText().toString()));
+
+                    int next = 1;
+                    if(stringDatas.get(date) != null) {
+                        next = Integer.parseInt(stringDatas.get(date)) + 1;
+                    }
+
+                    Log.d("Next", String.valueOf(next));
+
+                    database.collection("user")
+                            .document(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
+                            .collection("StringWorks")
+                            .document(date + "-" + String.valueOf(next))
+                            .set(stringRecord)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isSuccessful()) {
+                                        Log.d("Firebase", "SUCCESS! Return to MyPage!");
+                                        getParentFragmentManager().beginTransaction()
+                                                .replace(R.id.nav_host_fragment, new MyPageFragment())
+                                                .addToBackStack("AddStringRecord")
+                                                .commit();
+                                    } else {
+                                        task.getException().printStackTrace();
+                                    }
                                 }
-                            }
-                        });
+                            });
+                }
             }
         });
 
@@ -257,11 +386,13 @@ public class AddStringRecordFragment extends Fragment {
                         itemPicker.setDisplayedValues(StringDataBase.getNamesInBrands(selectedBrand).toArray(new String[0]));
                         if(StringDataBase.getNamesInBrands(selectedBrand).size() == 1) {
                             addStringDataStringName.setText(StringDataBase.getNamesInBrands(selectedBrand).get(0));
+                            selectedString = StringDataBase.getNamesInBrands(selectedBrand).get(0);
                         }
                         itemPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
                             @Override
                             public void onValueChange(NumberPicker numberPicker, int i, int i1) {
                                 addStringDataStringName.setText(StringDataBase.getNamesInBrands(selectedBrand).get(i1));
+                                selectedString = StringDataBase.getNamesInBrands(selectedBrand).get(0);
                             }
                         });
                     }

@@ -70,4 +70,8 @@ public class StringListViewAdapter extends BaseAdapter {
         StringRecordItem item = new StringRecordItem(date, brand, name, tension);
         listViewItemList.set(listViewItemList.size() - 1, item);
     }
+
+    public ArrayList<StringRecordItem> getStringRecordList() {
+        return listViewItemList;
+    }
 }
