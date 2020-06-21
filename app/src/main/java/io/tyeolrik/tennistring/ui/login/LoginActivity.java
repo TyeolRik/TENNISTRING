@@ -32,15 +32,11 @@ import io.tyeolrik.tennistring.ui.initialize.InitializeUser;
 public class LoginActivity extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 123;
-    private ImageView splashImageView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        splashImageView = findViewById(R.id.splashImageView);
-        Picasso.get().load(R.mipmap.tennistring_splash_screen).placeholder(R.mipmap.tennistring_splash_screen).into(splashImageView);
 
         List<AuthUI.IdpConfig> providers = Arrays.asList(
                 new AuthUI.IdpConfig.EmailBuilder().build(),

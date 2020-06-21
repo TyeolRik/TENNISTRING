@@ -118,17 +118,21 @@ public class MyPageFragment extends Fragment {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if(task.isSuccessful()) {
                             Log.d("Firebase", "SUCCESS!");
-                            for(QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d("Firebase",document.getId() + " => " + document.getData());
-                                String date = (String) document.getData().get("Date");
-                                String Brand = (String) document.getData().get("Brand");
-                                String Name = (String) document.getData().get("Name");
-                                Long tensionMain = (Long) document.getData().get("Main");
-                                Long tensionCross = (Long) document.getData().get("Cross");
-                                stringListViewAdapter.addItem(date, Brand, Name, String.format(Locale.KOREA, "%02d | %02d", tensionMain, tensionCross));
+                            if (task.getResult() != null) {
+                                for(QueryDocumentSnapshot document : task.getResult()) {
+                                    Log.d("Firebase",document.getId() + " => " + document.getData());
+                                    String date = (String) document.getData().get("Date");
+                                    String Brand = (String) document.getData().get("Brand");
+                                    String Name = (String) document.getData().get("Name");
+                                    Long tensionMain = (Long) document.getData().get("Main");
+                                    Long tensionCross = (Long) document.getData().get("Cross");
+                                    stringListViewAdapter.addItem(date, Brand, Name, String.format(Locale.KOREA, "%02d | %02d", tensionMain, tensionCross));
+                                }
+                                stringListViewAdapter.notifyDataSetChanged();
+                                updateAllPreference(stringListViewAdapter.getStringRecordList());
+                            } else {
+                                Log.d("Firebase", "NO DATA!");
                             }
-                            stringListViewAdapter.notifyDataSetChanged();
-                            updateAllPreference(stringListViewAdapter.getStringRecordList());
                         } else {
                             task.getException().printStackTrace();
                         }
