@@ -9,16 +9,16 @@
             android:icon="@drawable/ic_baseline_person_24_black"
             android:title="@string/menu_mypage" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_stringzone"
             android:icon="@drawable/ic_baseline_sports_tennis_24_black"
             android:title="@string/menu_string_zone" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_equipmentzone"
             android:icon="@drawable/ic_baseline_whatshot_24_black"
             android:title="@string/menu_equipment_zone" />
-        <!--item
+        <item
             android:id="@+id/nav_userInfo"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_userInfo" /-->
+            android:title="@string/menu_userInfo" />
     </group>
 </menu>

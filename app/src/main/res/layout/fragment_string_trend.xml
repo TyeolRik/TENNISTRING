@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/string_trend_framelayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.stringzone.StringTrendFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:text="현재 선수들의 텐션 평균은?"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+        <TextView
+            android:id="@+id/string_info_textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="크로스"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="@+id/string_info_textView1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/string_info_textView1"
+            app:layout_constraintTop_toTopOf="@+id/string_info_textView1"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/string_info_textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="메인"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toStartOf="@+id/string_info_textView2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="요즘 많이 더우시죠?"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/textView12"
+            app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="텐션을 평소보다 높이세요!"
+            android:textColor="#000"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/textView10"
+            app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:text="잊기 쉬운 스트링 꿀팁!"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/goBackToStringZone" />
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="48dp"
+            android:text="알루파워를 기준으로 기온이 20도와 40도 일 때를 비교해보았을 때, 최대 9.1%의 텐션 오차가 있었답니다!"
+            android:textAlignment="textStart"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+        <TextView
+            android:id="@+id/average_main_tension_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="00"
+            android:textAlignment="center"
+            android:textColor="#000"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/string_info_textView1"
+            app:layout_constraintStart_toStartOf="@+id/string_info_textView1"
+            app:layout_constraintTop_toBottomOf="@+id/string_info_textView1" />
+
+        <TextView
+            android:id="@+id/average_cross_tension_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="00"
+            android:textAlignment="center"
+            android:textColor="#000"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/string_info_textView2"
+            app:layout_constraintStart_toStartOf="@+id/string_info_textView2"
+            app:layout_constraintTop_toBottomOf="@+id/string_info_textView2" />
+
+        <ImageButton
+            android:id="@+id/goBackToStringZone"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:background="#00000000"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_baseline_arrow_back_24_black"
+            android:tint="#000"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

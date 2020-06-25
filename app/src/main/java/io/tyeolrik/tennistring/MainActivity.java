@@ -11,8 +11,6 @@ import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -74,17 +72,18 @@ public class MainActivity extends AppCompatActivity {
         navigationView.bringToFront();
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        /*
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow, R.id.nav_userInfo)
+                R.id.nav_home, R.id.nav_stringzone, R.id.nav_equipmentzone, R.id.nav_userInfo)
                 .setDrawerLayout(drawer)
                 .build();
-         */
+
+        /*
         // For Smaller Project
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_gallery)
                 .setDrawerLayout(drawer)
                 .build();
+         */
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
 
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);

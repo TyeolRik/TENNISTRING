@@ -12,13 +12,13 @@
         tools:layout="@layout/fragment_mypage" />
 
     <fragment
-        android:id="@+id/nav_gallery"
+        android:id="@+id/nav_stringzone"
         android:name="io.tyeolrik.tennistring.ui.stringzone.StringZoneFragment"
         android:label="@string/menu_string_zone"
         tools:layout="@layout/fragment_stringzone" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
+        android:id="@+id/nav_equipmentzone"
         android:name="io.tyeolrik.tennistring.ui.equipmentzone.EquipmentZoneFragment"
         android:label="@string/menu_equipment_zone"
         tools:layout="@layout/fragment_equipmentzone" />

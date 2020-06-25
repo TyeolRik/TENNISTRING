@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.userInfo.StringerFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="48dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <Spinner
+                android:id="@+id/searchingConditionForStringer"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:entries="@array/searching_condition"
+                android:textAlignment="center" />
+
+            <EditText
+                android:id="@+id/searchingTextForStringer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:hint="입력해주세요"
+                android:inputType="textPersonName"
+                android:textColor="#000"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/searchingButtonForStringer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:text="검색" />
+
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/stringerSearchingListView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="48dp"
+            android:layout_marginBottom="32dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/unsubscribeButtonInStringerFragment"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inquiryRacketBrand" />
+
+        <Button
+            android:id="@+id/unsubscribeButtonInStringerFragment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginEnd="48dp"
+            android:layout_marginBottom="32dp"
+            android:background="@color/colorAccent"
+            android:text="회원탈퇴"
+            android:textColor="#000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/inquiryName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="백승록"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="@+id/linearLayout4"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
+
+        <TextView
+            android:id="@+id/inquiryCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="아마추어"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/inquiryName"
+            app:layout_constraintStart_toEndOf="@+id/inquiryName"
+            app:layout_constraintTop_toTopOf="@+id/inquiryName" />
+
+        <TextView
+            android:id="@+id/inquiryTeam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="서울시립대"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/inquiryCategory"
+            app:layout_constraintStart_toEndOf="@+id/inquiryCategory"
+            app:layout_constraintTop_toTopOf="@+id/inquiryCategory" />
+
+        <TextView
+            android:id="@+id/inquiryRacketBrand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Wilson (윌슨)"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="@+id/inquiryName"
+            app:layout_constraintTop_toBottomOf="@+id/inquiryName" />
+
+        <TextView
+            android:id="@+id/inquiryRacketName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:text="Prostaff 97"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/inquiryRacketBrand"
+            app:layout_constraintStart_toEndOf="@+id/inquiryRacketBrand"
+            app:layout_constraintTop_toTopOf="@+id/inquiryRacketBrand" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

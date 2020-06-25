@@ -7,10 +7,10 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_mypage">My PAGE</string>
+    <string name="menu_mypage">My STRING</string>
     <string name="menu_string_zone">스트링 ZONE</string>
     <string name="menu_equipment_zone">장비 ZONE</string>
-    <string name="menu_userInfo">고객정보</string>
+    <string name="menu_userInfo">MY PAGE</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_id">ID를 입력해주세요</string>

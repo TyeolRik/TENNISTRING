@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
@@ -18,13 +19,19 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.Transaction;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -33,6 +40,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
@@ -271,6 +279,66 @@ public class AddStringRecordFragment extends Fragment {
 
                     Log.d("Next", String.valueOf(next));
 
+                    Task<Void> updateUserStringData = database.collection("user")
+                            .document(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
+                            .collection("StringWorks")
+                            .document(date + "-" + String.valueOf(next))
+                            .set(stringRecord)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isSuccessful()) {
+                                        Log.d("Firebase", "SUCCESS! to Update User String Data");
+                                        /*
+                                        getParentFragmentManager().beginTransaction()
+                                                .replace(R.id.nav_host_fragment, new MyPageFragment())
+                                                .addToBackStack("AddStringRecord")
+                                                .commit();
+                                         */
+                                    } else {
+                                        task.getException().printStackTrace();
+                                    }
+                                }
+                            });
+
+                    Task<Void> updateAverageStringData = database.runTransaction(new Transaction.Function<Void>() {
+                        @Nullable
+                        @Override
+                        public Void apply(@NonNull Transaction transaction) throws FirebaseFirestoreException {
+                            Log.d("Firebase", "updateAverageStringData");
+                            DocumentReference aggregate = database.collection("application").document("Aggregate");
+                            DocumentSnapshot average = transaction.get(aggregate);
+
+                            double averageMainTension;
+                            double averageCrossTension;
+                            long averageTensionCount = average.getLong("avg_tension_count");
+
+                            if (averageTensionCount == 0) {
+                                averageMainTension = Double.parseDouble(addStringDataTensionMain.getText().toString());
+                                averageCrossTension = Double.parseDouble(addStringDataTensionCross.getText().toString());
+                            } else {
+                                averageMainTension = (average.getDouble("avg_main_tension") + Double.parseDouble(addStringDataTensionMain.getText().toString())) / averageTensionCount;
+                                averageCrossTension = (average.getDouble("avg_cross_tension") + Double.parseDouble(addStringDataTensionCross.getText().toString())) / averageTensionCount;
+                            }
+
+                            transaction.update(aggregate, "avg_main_tension", averageMainTension, "avg_cross_tension", averageCrossTension, "avg_tension_count", averageTensionCount + 1);
+
+                            return null;
+                        }
+                    });
+
+                    Task<List<Task<?>>> goBackFragment = Tasks.whenAllComplete(updateUserStringData, updateAverageStringData).addOnSuccessListener(new OnSuccessListener<List<Task<?>>>() {
+                        @Override
+                        public void onSuccess(List<Task<?>> tasks) {
+                            Log.d("Firebase", "SUCCESS! Return to MyPage!");
+                            getParentFragmentManager().beginTransaction()
+                                    .replace(R.id.nav_host_fragment, new MyPageFragment())
+                                    .addToBackStack("AddStringRecord")
+                                    .commit();
+                        }
+                    });
+
+                    /*
                     database.collection("user")
                             .document(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()))
                             .collection("StringWorks")
@@ -281,6 +349,7 @@ public class AddStringRecordFragment extends Fragment {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(task.isSuccessful()) {
                                         Log.d("Firebase", "SUCCESS! Return to MyPage!");
+
                                         getParentFragmentManager().beginTransaction()
                                                 .replace(R.id.nav_host_fragment, new MyPageFragment())
                                                 .addToBackStack("AddStringRecord")
@@ -290,6 +359,24 @@ public class AddStringRecordFragment extends Fragment {
                                     }
                                 }
                             });
+
+                    DocumentReference aggregate = FirebaseFirestore.getInstance().collection("application").document("Aggregate");
+                    DocumentSnapshot average = aggregate.get().getResult();
+                    double averageMainTension;
+                    double averageCrossTension;
+                    long averageTensionCount = average.getLong("avg_tension_count");
+
+                    if (averageTensionCount == 0) {
+                        averageMainTension = Double.parseDouble(addStringDataTensionMain.getText().toString());
+                        averageCrossTension = Double.parseDouble(addStringDataTensionCross.getText().toString());
+                    } else {
+                        averageMainTension = (average.getDouble("avg_main_tension") + Double.parseDouble(addStringDataTensionMain.getText().toString())) / averageTensionCount;
+                        averageCrossTension = (average.getDouble("avg_cross_tension") + Double.parseDouble(addStringDataTensionCross.getText().toString())) / averageTensionCount;
+                    }
+                    aggregate.update("avg_main_tension", averageMainTension);
+                    aggregate.update("avg_cross_tension", averageCrossTension);
+                    aggregate.update("avg_tension_count", averageTensionCount);
+                     */
                 }
             }
         });

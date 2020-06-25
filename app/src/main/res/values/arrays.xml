@@ -176,4 +176,9 @@
         <item>369</item>
     </string-array>
 
+    <string-array name="searching_condition">
+        <item>이름</item>
+        <item>소속</item>
+        <item>라켓</item>
+    </string-array>
 </resources>

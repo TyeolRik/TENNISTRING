@@ -34,6 +34,7 @@ import java.util.HashMap;
 import java.util.Locale;
 
 import io.tyeolrik.tennistring.R;
+import io.tyeolrik.tennistring.ui.mypage.MyPageFragment;
 
 public class StringZoneFragment extends Fragment {
 
@@ -44,6 +45,7 @@ public class StringZoneFragment extends Fragment {
     TextView stringerRecommend_StringName, stringerRecommend_StringBrand, stringerRecommend_StringDiameter, stringerRecommend_mention;
     TextView needDurability, needPower, needControl, needSoftness, needSpin, needTension;
     TextView needSearchButton;
+    TextView goFindTrendButton;
 
     ListView statisticsListView;
     StringListViewAdapter stringListViewAdapter;
@@ -85,13 +87,15 @@ public class StringZoneFragment extends Fragment {
 
         stringInformation_Brand             = root.findViewById(R.id.stringInformation_Brand);
         stringInformation_Gauge             = root.findViewById(R.id.stringInformation_Gauge);
-        stringInformation_Name             = root.findViewById(R.id.stringInformation_Name);
-        stringInformation_Durability             = root.findViewById(R.id.stringInformation_Durability);
+        stringInformation_Name              = root.findViewById(R.id.stringInformation_Name);
+        stringInformation_Durability        = root.findViewById(R.id.stringInformation_Durability);
         stringInformation_Power             = root.findViewById(R.id.stringInformation_Power);
-        stringInformation_Control             = root.findViewById(R.id.stringInformation_Control);
-        stringInformation_Feel             = root.findViewById(R.id.stringInformation_Feel);
-        stringInformation_Spin             = root.findViewById(R.id.stringInformation_Spin);
-        stringInformation_Tension             = root.findViewById(R.id.stringInformation_Tension);
+        stringInformation_Control           = root.findViewById(R.id.stringInformation_Control);
+        stringInformation_Feel              = root.findViewById(R.id.stringInformation_Feel);
+        stringInformation_Spin              = root.findViewById(R.id.stringInformation_Spin);
+        stringInformation_Tension           = root.findViewById(R.id.stringInformation_Tension);
+
+        goFindTrendButton                   = root.findViewById(R.id.goFindTrendButton);
 
         whatIsClickedNow = new ArrayList<>();
 
@@ -217,12 +221,24 @@ public class StringZoneFragment extends Fragment {
             }
         });
 
+        goFindTrendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                StringTrendFragment stringTrendFragment = new StringTrendFragment();
+                getParentFragmentManager().beginTransaction()
+                        .replace(R.id.nav_host_fragment, stringTrendFragment)
+                        .addToBackStack("String Zone Fragment")
+                        .commit();
+            }
+        });
+
         stringZoneViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
 
             }
         });
+
         return root;
     }
 
